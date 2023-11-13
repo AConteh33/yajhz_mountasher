@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:yajhz_mountasher/controllers/auth_controller.dart';
 import 'package:yajhz_mountasher/controllers/product_controller.dart';
 import 'package:yajhz_mountasher/model/category.dart';
 
@@ -20,7 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Widget lists( { title , list , required double height , child } ) {
+  Widget lists({ title , list , required double height , child }) {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +36,7 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: height,
           width: MediaQuery.of(context).size.width,
           child: child,
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  final Product_Controller product_controller = Get.put(Product_Controller());
+  final AuthController auth = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,9 @@ class _HomeState extends State<Home> {
               children: [
 
                 //Add Top app here.
-                const Top_Bar(),
+                Top_Bar(
+                  ishome: true,
+                ),
 
                 Top_Header(),
 

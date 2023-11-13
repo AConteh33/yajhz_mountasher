@@ -1,31 +1,31 @@
 // To parse this JSON data, do
 //
-//     final createAccountModel = createAccountModelFromJson(jsonString);
+//     final accountInfo = accountInfoFromJson(jsonString);
 
 import 'dart:convert';
 
-CreateAccountModel createAccountModelFromJson(String str) => CreateAccountModel.fromJson(json.decode(str));
+AccountInfo accountInfoFromJson(String str) => AccountInfo.fromJson(json.decode(str));
 
-String createAccountModelToJson(CreateAccountModel data) => json.encode(data.toJson());
+String accountInfoToJson(AccountInfo data) => json.encode(data.toJson());
 
-class CreateAccountModel {
+class AccountInfo {
   bool success;
   int responseCode;
   String message;
-  nData data;
+  userData data;
 
-  CreateAccountModel({
+  AccountInfo({
     required this.success,
     required this.responseCode,
     required this.message,
     required this.data,
   });
 
-  factory CreateAccountModel.fromJson(Map<String, dynamic> json) => CreateAccountModel(
+  factory AccountInfo.fromJson(Map<String, dynamic> json) => AccountInfo(
     success: json["success"],
     responseCode: json["response_code"],
     message: json["message"],
-    data: nData.fromJson(json["data"]),
+    data: userData.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -34,10 +34,9 @@ class CreateAccountModel {
     "message": message,
     "data": data.toJson(),
   };
-
 }
 
-class nData {
+class userData {
   int id;
   String name;
   String email;
@@ -49,7 +48,7 @@ class nData {
   List<dynamic> addresses;
   String token;
 
-  nData({
+  userData({
     required this.id,
     required this.name,
     required this.email,
@@ -62,17 +61,17 @@ class nData {
     required this.token,
   });
 
-  factory nData.fromJson(Map<String, dynamic> json) => nData(
-    id: json["id"] ?? 0,
-    name: json["name"] ?? '',
-    email: json["email"] ?? '',
-    phone: json["phone"] ?? '',
-    image: json["image"] ?? '',
-    type: json["type"] ?? 0,
-    status: json["status"] ?? 0,
-    balance: json["balance"] ?? '',
-    addresses: List<dynamic>.from(json["addresses"] == null ? []:json["addresses"].map((x) => x)),
-    token: json["token"] ?? '',
+  factory userData.fromJson(Map<String, dynamic> json) => userData(
+    id: json["id"],
+    name: json["name"],
+    email: json["email"],
+    phone: json["phone"],
+    image: json["image"],
+    type: json["type"],
+    status: json["status"],
+    balance: json["balance"],
+    addresses: List<dynamic>.from(json["addresses"].map((x) => x)),
+    token: json["token"],
   );
 
   Map<String, dynamic> toJson() => {

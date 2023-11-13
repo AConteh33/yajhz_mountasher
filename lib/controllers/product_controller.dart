@@ -8,11 +8,27 @@ import '../service/remote_service.dart';
 
 class Product_Controller extends GetxController{
 
-  PopularSeller Popularlist = PopularSeller(success: true, responseCode: 0, message: 'message', data: []);
+  PopularSeller Popularlist = PopularSeller(
+      success: true,
+      responseCode: 0,
+      message: '',
+      data: []
+  );
 
-  TrendingSeller Trendinglist = TrendingSeller(success: true, responseCode: 0, message: '', data: []);
+  TrendingSeller Trendinglist = TrendingSeller(
+      success: true,
+      responseCode: 0,
+      message: '',
+      data: [],
+  );
 
-  MainCategory Categorylist = MainCategory(success: true, responseCode: 0, message: '', data: [], cartCount: 0);
+  MainCategory Categorylist = MainCategory(
+      success: true,
+      responseCode: 0,
+      message: '',
+      data: [],
+      cartCount: 0,
+  );
 
   static var client = http.Client();
 
@@ -25,11 +41,6 @@ class Product_Controller extends GetxController{
   }
 
   void fetchPupolar_sellers() async {
-
-    // Data isn't receiving anything so i added artificial data
-    // Popularlist.value.add(
-    //     PopularSeller(lat: 0.0, lng: 0.0, filter: 1, name: '')
-    // );
 
     try {
       // isLoading(true);
@@ -45,13 +56,6 @@ class Product_Controller extends GetxController{
   }
 
   void fetchtrending_sellers() async {
-
-    // Data isn't receiving anything so i added artificial data
-    // Trendinglist.value.add(
-    //     TrendingSeller(
-    //         lat: 0.0, lng: 0.0, filter: 1, name: ''
-    //     ),
-    // );
 
     try {
       // isLoading(true);
@@ -69,13 +73,6 @@ class Product_Controller extends GetxController{
   }
 
   void fetchcayegory() async {
-
-    // Data isn't receiving anything so i added artificial data
-    // Categorylist.value.add(
-    //   Category(
-    //         image: '',
-    //     ),
-    // );
 
     try {
       // isLoading(true);

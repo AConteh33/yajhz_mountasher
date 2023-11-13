@@ -22,8 +22,6 @@ class RemoteServices {
 
     request.headers.addAll(headers);
 
-    // http.StreamedResponse response = await request.send();
-
     if (request.statusCode == 200) {
 
       var jsonString = request.body;
@@ -32,25 +30,9 @@ class RemoteServices {
 
     } else {
 
-      //show error message
-
       return null;
 
     }
-    // Map<String, String> data =response.body
-    //
-    //
-    //
-    // if (response.statusCode == 200) {
-    //
-    //   response.;
-    //   print(await response.stream.bytesToString());
-    //
-    // } else {
-    //
-    //   print(response.reasonPhrase);
-    //
-    // }
   }
 
   static Future<PopularSeller?> fetchPupolar_sellers() async {
@@ -75,7 +57,6 @@ class RemoteServices {
       'lang': 'ar',
     };
 
-    // http.Response request = await client.get(Uri.parse('https://yogahez.mountasher.online/api/popular-sellers?lat=29.1931&lng=30.6421&filter=1'));
     var request = http.MultipartRequest('GET', Uri.parse('https://yogahez.mountasher.online/api/popular-sellers?lat=29.1931&lng=30.6421&filter=1'));
 
     request.headers.addAll(headers);
@@ -84,19 +65,7 @@ class RemoteServices {
 
     if (response.statusCode == 200) {
 
-      // var jsontestString =
-      //     '[\r\n'
-      //     '{\r\n'
-      //     '"lat": 29.1931,'
-      //     '"lng": 30.6421,'
-      //     '"filter": 1,'
-      //     '"name": "family1"'
-      //     '}\r\n'
-      //     ']\r\n';
-
       var responseBody = await response.stream.bytesToString();
-
-      // var jsonString = responseBody.b;
 
       print(responseBody);
 
@@ -104,26 +73,10 @@ class RemoteServices {
 
     } else {
 
-      //show error message
-
       return null;
 
     }
 
-    // Map<String, String> data =response.body
-    //
-    //
-    //
-    // if (response.statusCode == 200) {
-    //
-    //   response.;
-    //   print(await response.stream.bytesToString());
-    //
-    // } else {
-    //
-    //   print(response.reasonPhrase);
-    //
-    // }
   }
 
   static Future<TrendingSeller?> fetchTrending_sellers() async {
@@ -149,19 +102,7 @@ class RemoteServices {
 
     if (response.statusCode == 200) {
 
-      // var jsontestString =
-      //     '[\n'
-      //     '{\n'
-      //     '"lat": 29.1931,'
-      //     '"lng": 30.6421,'
-      //     '"filter": 1,'
-      //     '"name": "family1"'
-      //     '}\n'
-      //     ']\n';
-
       var responseBody = await response.stream.bytesToString();
-
-      // await response.stream.bytesToString();
 
       var jsonString = jsonDecode(responseBody);
 
@@ -171,7 +112,6 @@ class RemoteServices {
 
     } else {
 
-      //show error message
       return null;
 
     }
@@ -215,27 +155,9 @@ class RemoteServices {
 
     } else {
 
-      //show error message
-
       return null;
 
     }
-
-    // Map<String, String> data =response.body
-    //
-    //
-    //
-    // if (response.statusCode == 200) {
-    //
-    //   response.;
-    //   print(await response.stream.bytesToString());
-    //
-    // } else {
-    //
-    //   print(response.reasonPhrase);
-    //
-    // }
-
 
   }
 

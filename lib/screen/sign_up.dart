@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../components/constants.dart';
 import '../components/field.dart';
-import '../controllers/login_controller.dart';
+import '../controllers/auth_controller.dart';
 import '../widget/button.dart';
 import 'home.dart';
 
@@ -171,7 +171,7 @@ class _Sign_upState extends State<Sign_up> {
                                       errorphone = '';
                                       errorpassmsg = '';
                                       errorconfmsg = '';
-                                      print('almost done');
+
                                       if(namectrl.text.isEmpty){
                                         errorname = 'Enter your name';
                                       }else if( namectrl.text.characters.length <= 14){
@@ -198,16 +198,16 @@ class _Sign_upState extends State<Sign_up> {
                                         errorpassmsg = '';
                                         errorconfmsg = '';
 
+                                        authController.start_register(
+                                          name: namectrl.text,
+                                          email: emailctrl.text,
+                                          password: passctrl.text,
+                                          phone: phonectrl.text,
+                                          context: context,
+                                        );
 
-                                        print('done');
                                       }
-                                      authController.start_register(
-                                        name: namectrl.text,
-                                        email: emailctrl.text,
-                                        password: passctrl.text,
-                                        phone: phonectrl.text,
-                                        context: context,
-                                      );
+
                                       setState(() {
 
                                       });

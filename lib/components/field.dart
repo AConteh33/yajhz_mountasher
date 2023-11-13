@@ -42,13 +42,6 @@ Widget field(hint,textEditingController,
                     keyboardType: keyboard,
                     decoration: InputDecoration(
                       hintText: hint,
-                      // label: Text(
-                      //   hint,
-                      //   style: TextStyle(
-                      //       color: Colors.grey,
-                      //       fontSize: 10.0,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
                       hintStyle: TextStyle(color: Colors.grey,fontSize: 10.0,),
                       contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       border: OutlineInputBorder(
@@ -109,13 +102,6 @@ Widget sfield(hint,textEditingController,
                     keyboardType: keyboard,
                     decoration: InputDecoration(
                       hintText: hint,
-                      // label: Text(
-                      //   hint,
-                      //   style: TextStyle(
-                      //       color: Colors.grey,
-                      //       fontSize: 10.0,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
                       hintStyle: TextStyle(color: Colors.grey,fontSize: 10.0,),
                       contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       border: OutlineInputBorder(

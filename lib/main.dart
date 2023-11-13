@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yajhz_mountasher/controllers/login_controller.dart';
+import 'package:yajhz_mountasher/controllers/auth_controller.dart';
 import 'package:yajhz_mountasher/screen/home.dart';
 import 'package:yajhz_mountasher/screen/login.dart';
 import 'package:yajhz_mountasher/widget/loading_screen.dart';
@@ -9,10 +9,23 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  AuthController authController = Get.put(AuthController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +38,10 @@ class MyApp extends StatelessWidget {
         shadowColor: Colors.black12,
       ),
       home: GetBuilder<AuthController>(
+          global: true,
         init: AuthController(),
         builder: (auth) {
 
-          // auth.checkifloggedin();
           if(auth.loading.value){
             return const Loading_Screen();
           }else{
@@ -38,7 +51,6 @@ class MyApp extends StatelessWidget {
               return const Login();
             }
           }
-
 
         }
       ),

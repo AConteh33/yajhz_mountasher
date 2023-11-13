@@ -7,7 +7,7 @@ import 'package:yajhz_mountasher/screen/sign_up.dart';
 import 'package:yajhz_mountasher/widget/button.dart';
 
 import '../components/constants.dart';
-import '../controllers/login_controller.dart';
+import '../controllers/auth_controller.dart';
 import '../widget/top_bar.dart';
 
 class Login extends StatefulWidget {

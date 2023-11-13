@@ -29,10 +29,7 @@ class Card_Category extends StatelessWidget {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // Image.asset('assets/ramen.png'),
-                    Image.network(
-                        category.image
-                    ),
+                    Image.network(category.image),
                   ],
                 )),
                 Row(

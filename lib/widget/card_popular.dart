@@ -37,8 +37,6 @@ class Card_Popular extends StatelessWidget {
                 ),
               ),
 
-
-
               Positioned(
                   top: 8,
                   left: 8,
@@ -67,8 +65,6 @@ class Card_Popular extends StatelessWidget {
                       children: [
 
                         Text(popularseller.name,style: txtsub.copyWith(color: Colors.white),),
-
-                        // Spacer(),
 
                         const SizedBox(height: 3,),
 
