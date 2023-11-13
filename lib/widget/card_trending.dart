@@ -8,7 +8,7 @@ class Card_Trending extends StatelessWidget {
 
   Card_Trending({required this.trendingseller});
 
-  TrendingSeller trendingseller;
+  Datlist trendingseller;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class Card_Trending extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/McDonalds.png',scale: 20,),
+                      Image.network(trendingseller.image,scale: 20,),
                     ],
                   ),
                 ],

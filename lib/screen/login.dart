@@ -141,15 +141,10 @@ class _LoginState extends State<Login> {
 
                                 Row(
                                   children: [
-                                    SizedBox(width: 40),
+                                    const SizedBox(width: 40),
                                     Text('Forget the password ?',style: txtsub.copyWith(color: Colors.grey,fontWeight: FontWeight.bold),),
                                   ],
                                 ),
-
-                                // SizedBox(height: 5),
-
-
-                                // Text(erroremailmsg != '' ? erroremailmsg : errorpassmsg, style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),),
 
                                 const SizedBox(height: 20),
 
@@ -158,27 +153,32 @@ class _LoginState extends State<Login> {
                                     width: MediaQuery.of(context).size.width - 100,
                                     ontap: (){
 
-                                      // if (emailctrl.text.isEmpty){
-                                      //   erroremailmsg = 'Please enter your Email';
-                                      // }else if(passctrl.text.isEmpty){
-                                      //   errorpassmsg = 'Please enter your Password';
-                                      // }else{
-                                      //   erroremailmsg = '';
-                                      //   errorpassmsg = '';
-                                      //   loginController.start_login(emailctrl.text,passctrl.text);
-                                      // }
-                                      //
-                                      // setState(() {
-                                      //
-                                      // });
+                                      if (emailctrl.text.isEmpty){
+                                        erroremailmsg = 'Please enter your Email';
+                                      }else if(passctrl.text.isEmpty){
+                                        errorpassmsg = 'Please enter your Password';
+                                        passctrl.clear();
+                                      }else{
+                                        erroremailmsg = '';
+                                        errorpassmsg = '';
 
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                          const Home(),
-                                        ),
-                                      );
+                                        loginController.start_login(emailctrl.text,passctrl.text,context);
+
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) =>
+                                        //     const Home(),
+                                        //   ),
+                                        // );
+
+                                      }
+
+                                      setState(() {
+
+                                      });
+
+
 
                                     }),
 

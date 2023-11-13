@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:yajhz_mountasher/controllers/product_controller.dart';
+import 'package:yajhz_mountasher/model/category.dart';
 
 import '../components/constants.dart';
 import '../widget/card_category.dart';
@@ -19,7 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Widget lists({title,list,required double height,child}){
+  Widget lists( { title , list , required double height , child } ) {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,8 +30,8 @@ class _HomeState extends State<Home> {
           child: Row(
             children: [
               Text(title),
-              Spacer(),
-              Text('View all',style: txtsub.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,fontSize: 10),),
+              const Spacer(),
+              Text('View all',style: txtsub.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,fontSize: 8),),
             ],
           ),
         ),
@@ -50,75 +51,82 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: SafeArea(
-        child: Column(
-          children: [
-            //Add Top app here.
-            const Top_Bar(),
+        child: GetBuilder<Product_Controller>(
+          init: Product_Controller(),
+          builder: (product) {
+            return Column(
+              children: [
 
-            Top_Header(),
+                //Add Top app here.
+                const Top_Bar(),
 
-            Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
+                Top_Header(),
 
-                      lists(
-                        title: 'Categories',
-                        height: 100,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: product_controller.Categorylist.value.length,
-                          itemBuilder: (BuildContext context, int index) {
+                Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
 
-                            return Card_Category(
-                              category: product_controller.Categorylist.value[index],
-                            );
+                          lists(
+                            title: 'Categories',
+                            height: 100,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: product.Categorylist.data.length,
+                              itemBuilder: (BuildContext context, int index) {
 
-                          }
-                        ),
+                                return Card_Category(
+                                  category : product.Categorylist.data[index],
+                                );
+
+                              }
+                            ),
+                          ),
+
+
+                          lists(
+                            title: 'Popular now',
+                            height: 140,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: product.Popularlist.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+
+                                  return Card_Popular(
+                                    popularseller: product.Popularlist.data[index],
+                                  );
+
+                              }
+                            ),
+                          ),
+
+                          lists(
+                            title: 'Trending now',
+                            height: 100,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: product.Trendinglist.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+
+                                  return Card_Trending(
+                                    trendingseller: product.Trendinglist.data[index],
+                                  );
+
+                                }
+                            ),
+                          ),
+
+                          ],
                       ),
-
-                      lists(
-                        title: 'Popular now',
-                        height: 140,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: product_controller.Popularlist.value.length,
-                            itemBuilder: (BuildContext context, int index) {
-
-                              return Card_Popular(
-                                popularseller: product_controller.Popularlist.value[index],
-                              );
-
-                          }
-                        ),
-                      ),
-
-                      lists(
-                        title: 'Trending now',
-                        height: 100,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: product_controller.Trendinglist.value.length,
-                            itemBuilder: (BuildContext context, int index) {
-
-                              return Card_Trending(
-                                trendingseller: product_controller.Trendinglist.value[index],
-                              );
-
-                            }
-                        ),
-                      ),
-
-                      ],
-                  ),
+                    ),
                 ),
-            ),
 
-          ],
+              ],
+            );
+          }
         ),
       )
     );

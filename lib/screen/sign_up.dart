@@ -6,6 +6,7 @@ import '../components/constants.dart';
 import '../components/field.dart';
 import '../controllers/login_controller.dart';
 import '../widget/button.dart';
+import 'home.dart';
 
 
 class Sign_up extends StatefulWidget {
@@ -29,7 +30,7 @@ class _Sign_upState extends State<Sign_up> {
 
   final AuthController authController = Get.put(AuthController());
 
-  Widget fieldwidget({title,hint,controller,obscure}){
+  Widget fieldwidget({title,hint,controller,obscure,keyboard}){
     return Column(
       children: [
         Row(
@@ -39,7 +40,7 @@ class _Sign_upState extends State<Sign_up> {
             Text(title),
           ],
         ),
-        field(hint, controller, obscure: obscure)
+        field(hint, controller, obscure: obscure,keyboard: keyboard)
       ],
     );
 
@@ -105,8 +106,8 @@ class _Sign_upState extends State<Sign_up> {
                                 fieldwidget(
                                     title: 'Name',
                                     hint: 'Write 14 Characters',
-                                    controller: emailctrl,
-                                    obscure: false
+                                    controller: namectrl,
+                                    obscure: false,keyboard:TextInputType.name,
                                 ),
 
                                 errorname != '' ?  Text(errorname , style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),):SizedBox(),
@@ -117,7 +118,8 @@ class _Sign_upState extends State<Sign_up> {
                                     title: 'Email',
                                     hint: 'Write your email',
                                     controller: emailctrl,
-                                    obscure: false
+                                    obscure: false,
+                                    keyboard:TextInputType.emailAddress,
                                 ),
 
                                 erroremailmsg != '' ?  Text(erroremailmsg , style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),):SizedBox(),
@@ -127,8 +129,8 @@ class _Sign_upState extends State<Sign_up> {
                                 fieldwidget(
                                     title: 'Phone Number',
                                     hint: 'Write 11 numbers',
-                                    controller: emailctrl,
-                                    obscure: false
+                                    controller: phonectrl,
+                                    obscure: false,keyboard:TextInputType.phone,
                                 ),
 
                                 errorphone != '' ?  Text(errorphone , style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),):SizedBox(),
@@ -139,7 +141,7 @@ class _Sign_upState extends State<Sign_up> {
                                     title: 'Password',
                                     hint: 'Write 8 characters at least',
                                     controller: passctrl,
-                                    obscure: true
+                                    obscure: true,keyboard:TextInputType.visiblePassword,
                                 ),
 
                                 errorpassmsg != '' ?  Text(errorpassmsg , style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),):SizedBox(),
@@ -149,8 +151,9 @@ class _Sign_upState extends State<Sign_up> {
                                 fieldwidget(
                                   title: 'Confirm Password',
                                   hint: 'Write your Password again',
-                                  controller: passctrl,
-                                  obscure: false,
+                                  controller: confirmctrl,
+                                  keyboard:TextInputType.visiblePassword,
+                                  obscure: true,
                                 ),
 
                                 errorconfmsg != '' ?  Text(errorconfmsg , style: txtsub.copyWith(color: Colors.red,fontWeight: FontWeight.bold),):SizedBox(),
@@ -163,42 +166,67 @@ class _Sign_upState extends State<Sign_up> {
                                     width: MediaQuery.of(context).size.width - 100,
                                     ontap: (){
 
+                                      errorname = '';
+                                      erroremailmsg = '';
+                                      errorphone = '';
+                                      errorpassmsg = '';
+                                      errorconfmsg = '';
+                                      print('almost done');
                                       if(namectrl.text.isEmpty){
                                         errorname = 'Enter your name';
+                                      }else if( namectrl.text.characters.length <= 14){
+                                        errorname = 'Must be more than 14 Characters';
                                       }else if(emailctrl.text.isEmpty){
-                                        erroremailmsg = 'Enter your name';
-                                      }else if(passctrl.text.isEmpty){
-                                        errorpassmsg = 'Enter your Password';
-                                      }else if(confirmctrl.text != passctrl.text){
-                                        errorconfmsg = 'Confirm your Password';
+                                        erroremailmsg = 'Enter your email';
+                                      }else if(!emailctrl.text.contains('@') || !emailctrl.text.contains('.')){
+                                        erroremailmsg = 'Enter your a proper email';
                                       }else if(phonectrl.text.isEmpty){
-                                        errorphone = 'Enter your phone';
+                                        errorphone = 'Enter your phone number';
+                                      }else if(phonectrl.text.characters.length <= 11){
+                                        errorphone = 'Must be more than 11 numbers';
+                                      }else if(passctrl.text.isEmpty){
+                                        errorpassmsg = 'Enter your password';
+                                      }else if(confirmctrl.text.isEmpty){
+                                        errorconfmsg = 'Confirm your password';
+                                      }else if(confirmctrl.text != passctrl.text){
+                                        errorconfmsg = 'Password is not the same';
                                       }else{
 
-                                        authController.start_register(
-                                            namectrl.text,
-                                            emailctrl.text,
-                                            passctrl.text,
-                                            phonectrl.text
-                                        );
+                                        errorname = '';
+                                        erroremailmsg = '';
+                                        errorphone = '';
+                                        errorpassmsg = '';
+                                        errorconfmsg = '';
 
+
+                                        print('done');
                                       }
-
+                                      authController.start_register(
+                                        name: namectrl.text,
+                                        email: emailctrl.text,
+                                        password: passctrl.text,
+                                        phone: phonectrl.text,
+                                        context: context,
+                                      );
                                       setState(() {
 
                                       });
-
 
                                     }),
 
                                 const SizedBox(height: 20,),
 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('have an account ?',style: txtsub.copyWith(color: Colors.grey,fontWeight: FontWeight.bold),),
-                                    Text(' Log in',style: txtsub.copyWith(color: Colors.brown,fontWeight: FontWeight.bold),),
-                                  ],
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.of(context).pop();
+                                  },
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('have an account ?',style: txtsub.copyWith(color: Colors.grey,fontWeight: FontWeight.bold),),
+                                      Text(' Log in',style: txtsub.copyWith(color: Colors.brown,fontWeight: FontWeight.bold),),
+                                    ],
+                                  ),
                                 ),
 
                               ],

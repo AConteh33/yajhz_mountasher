@@ -7,7 +7,7 @@ import '../model/popular_sellers.dart';
 class Card_Category extends StatelessWidget {
   Card_Category({required this.category});
 
-  Category category;
+  CategoryData category;
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,19 @@ class Card_Category extends StatelessWidget {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Image.asset('assets/ramen.png'),
-                    // Image.network(category.image),
+                    // Image.asset('assets/ramen.png'),
+                    Image.network(
+                        category.image
+                    ),
                   ],
                 )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Restaurants',style: txtsub,),
+                    Text(
+                      category.name,
+                      style: txtsub,
+                    ),
                   ],
                 )
               ],

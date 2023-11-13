@@ -7,7 +7,7 @@ import '../model/trending_seller.dart';
 class Card_Popular extends StatelessWidget {
   Card_Popular({required this.popularseller});
 
-  PopularSeller popularseller;
+  Datum popularseller;
 
   Widget rated({star}){
     return Icon(star ? Icons.star : Icons.star_border ,size: 10,color: Colors.white);
@@ -33,8 +33,7 @@ class Card_Popular extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), // Image border
                 child: SizedBox.fromSize(
                   size: const Size.fromRadius(100), // Image radius
-                  child: Image.network('https://www.seriouseats.com/thmb/d2DYiLy-rNKmxrW1gchCOZcGIWY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210607-'
-                      'INNOUTBURGERS-JANJIGIAN-seriouseats-23-b2b8a505ff414272aab71590a8985b85.jpg', fit: BoxFit.cover),
+                  child: Image.network(popularseller.image, fit: BoxFit.cover),
                 ),
               ),
 
@@ -57,11 +56,11 @@ class Card_Popular extends StatelessWidget {
                 child: Container(
                   height: 60,
                   decoration: decore_bottom_curved.copyWith(
-                    color: Colors.black.withOpacity(0.3),
-                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20)),
+                    color: Colors.black.withOpacity(0.4),
+                    borderRadius: const BorderRadius.only(bottomRight: Radius.circular(20),bottomLeft: Radius.circular(20)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 7),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,22 +68,28 @@ class Card_Popular extends StatelessWidget {
 
                         Text(popularseller.name,style: txtsub.copyWith(color: Colors.white),),
 
+                        // Spacer(),
+
+                        const SizedBox(height: 3,),
+
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.add_location_sharp,size: 10,color: Colors.white),
-                            Text('15 Km',style: txtsub.copyWith(color: Colors.white),),
+                            const Icon(Icons.add_location_sharp,size: 10,color: Colors.white),
+                            Text(popularseller.distance,style: txtsub.copyWith(color: Colors.white),),
                           ],
                         ),
 
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            rated(star: true),
-                            rated(star: true),
-                            rated(star: true),
-                            rated(star: true),
-                            rated(star: false),
-                            SizedBox(width: 3,),
-                            Text('4.3',style: txtsub.copyWith(color: Colors.white)),
+                            rated(star: int.parse(popularseller.rate) > 1 ? true : false),
+                            rated(star: int.parse(popularseller.rate) > 2 ? true : false),
+                            rated(star: int.parse(popularseller.rate) > 3 ? true : false),
+                            rated(star: int.parse(popularseller.rate) > 4 ? true : false),
+                            rated(star: int.parse(popularseller.rate)>= 5 ? true : false),
+                            const SizedBox(width: 3),
+                            Text(popularseller.rate,style: txtsub.copyWith(color: Colors.white)),
                           ],
                         ),
 
