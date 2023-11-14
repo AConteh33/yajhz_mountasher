@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final popularSeller = popularSellerFromJson(jsonString);
 
 import 'dart:convert';
 
